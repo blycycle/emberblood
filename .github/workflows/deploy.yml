@@ -18,7 +18,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - run: mkdir site && unzip -q site.zip -d site && touch site/.nojekyll
+      - run: mkdir site && for z in site.zip site2.zip; do [ -f "$z" ] && unzip -q -o "$z" -d site; done; touch site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
